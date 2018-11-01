@@ -1,0 +1,26 @@
+{
+  "name": "midi2mqtt",
+  "description": "Bridge a MIDI device to MQTT",
+  "author": "Andy Swing <andy@swings.net> (https://github.com/TheOriginalAndrobot)",
+  "license": "MIT",
+  "version": "1.0.0",
+  "preferGlobal": true,
+  "bin": "./index.js",
+  "dependencies": {
+    "easymidi": "^1.0.1",
+    "midi": "^0.9.5",
+    "mqtt": "^2.18.8",
+    "yalm": "^4.0.2",
+    "yargs": "^6.0.3"
+  },
+  "keywords": [
+    "mqtt",
+    "midi",
+    "smarthome",
+    "iot"
+  ],
+  "repository": "https://github.com/TheOriginalAndrobot/midi2mqtt",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
