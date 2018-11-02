@@ -99,8 +99,8 @@ mqtt.on('message', function (topic, payload) {
 //
 // Midi connections
 //
-log.info('MIDI inputs: ', Midi.getInputs());
-log.info('MIDI outputs: ', Midi.getOutputs());
+log.info('Available MIDI inputs: ', Midi.getInputs());
+log.info('Available MIDI outputs: ', Midi.getOutputs());
 
 var midiIn = new Midi.Input(config.midiPort);
 var midiOut = new Midi.Output(config.midiPort);

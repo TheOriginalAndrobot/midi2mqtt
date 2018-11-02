@@ -9,9 +9,9 @@ This is a simple bridge between a MIDI device and MQTT. Right now it only suppor
 ## Getting started
 
 ### Prerequisites
-    * [Node.js](www.nodejs.org) >= 4.2.6 (including npm). 
-    * MIDI device connected and showing up when running e.g. `amidi -l`
-	* All pre-requisites from the node-midi package, including the libasound2-dev package if on Linux
+* Node.js >= 10.13.0 (including npm). 
+* MIDI device connected and showing up when running e.g. `amidi -l`
+* All pre-requisites from the node-midi package, including the libasound2-dev package if on Linux
 
 ### Install:    
 Run `sudo npm install -g midi2mqtt`. Note that you may need to first run `sudo apt-get install libasound2-dev`
@@ -22,6 +22,11 @@ to satisfy dependancies of the Node.js midi library.
 First run `midi2mqtt --help` to see how the program is used.
 * You will likely need to specify the MIDI port (`-p`)
 * You can also specify the MQTT topic prefix with `-t`, including slashes (e.g. `-t "home/midi"`).
+
+If you do not know the MIDI port names on your system, you can simply run `midi2mqtt` and look for the
+messages about avaialble MIDI input and output devices.
+
+Simply press `ctrl-c` to exit the application on the command line.
 
 ### Example command line:  
 `midi2mqtt -t "house/midi" -u "mqtt://mqtt-server" -p "Midi Fighter 3D 20:0"`
@@ -35,6 +40,7 @@ where \<topic\> defaults to 'midi', \<channel\> is the MIDI channel (0-15), \<ty
 of 'noteon', 'noteoff', etc., \<parameter\> depends on type, and \<value\> is the message payload
 which also depends on type.
 
+Currently supported topics are as follows:
 	<topic>/out/<channel>/noteon/<note> <velocity>
 	<topic>/out/<channel>/noteoff/<note> <velocity>
 	<topic>/out/<channel>/poly_aftertouch/<note> <pressure>
@@ -48,6 +54,7 @@ where \<topic\> defaults to 'midi', \<channel\> is the MIDI channel (0-15), \<ty
 of 'noteon', 'noteoff', etc., \<parameter\> depends on type, and \<value\> is the message payload
 which also depends on type.
 
+Currently supported topics are as follows:
 	<topic>/in/<channel>/noteon/<note> <velocity>
 	<topic>/in/<channel>/noteoff/<note> <velocity>
 	<topic>/in/<channel>/poly_aftertouch/<note> <pressure>
