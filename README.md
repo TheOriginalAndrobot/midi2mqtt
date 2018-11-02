@@ -2,27 +2,28 @@
 
 [![License][mit-badge]][mit-url]
 [![NPM version](https://badge.fury.io/js/midi2mqtt.svg)](http://badge.fury.io/js/midi2mqtt)
-[![Dependency Status](https://img.shields.io/gemnasium/TheOriginalAndrobot/midi2mqtt.svg)](https://gemnasium.com/github.com/TheOriginalAndrobot/midi2mqtt)
 
-This is a simple bridge between a MIDI device and MQTT.
+This is a simple bridge between a MIDI device and MQTT. Right now it only supports `noteon` `noteoff`
+`poly aftertouch` and `cc` messages.
 
 ## Getting started
 
-* Prerequisites
+### Prerequisites
     * [Node.js](www.nodejs.org) >= 4.2.6 (including npm). 
     * MIDI device connected and showing up when running e.g. `amidi -l`
 	* All pre-requisites from the node-midi package, including the libasound2-dev package if on Linux
 
-* Install:    
-`sudo npm install -g midi2mqtt`
+### Install:    
+Run `sudo npm install -g midi2mqtt`. Note that you may need to first run `sudo apt-get install libasound2-dev`
+to satisfy dependancies of the Node.js midi library.
 
 
-* Start:	
-`midi2mqtt --help`
-	* You will likely need to specify the MIDI port (`-p`)
-	* You can also specify the MQTT topic prefix with `-t`, including slashes (e.g. `-t "home/midi"`).
+### Start:	
+First run `midi2mqtt --help` to see how the program is used.
+* You will likely need to specify the MIDI port (`-p`)
+* You can also specify the MQTT topic prefix with `-t`, including slashes (e.g. `-t "home/midi"`).
 
-* Example command line:  
+### Example command line:  
 `midi2mqtt -t "house/midi" -u "mqtt://mqtt-server" -p "Midi Fighter 3D 20:0"`
 
 ## Topics and Payloads
@@ -34,10 +35,10 @@ where \<topic\> defaults to 'midi', \<channel\> is the MIDI channel (0-15), \<ty
 of 'noteon', 'noteoff', etc., \<parameter\> depends on type, and \<value\> is the message payload
 which also depends on type.
 
-`<topic>/out/<channel>/noteon/<note> <velocity>`
-`<topic>/out/<channel>/noteoff/<note> <velocity>`
-`<topic>/out/<channel>/poly_aftertouch/<note> <pressure>`
-`<topic>/out/<channel>/cc/<controller> <value>`
+	<topic>/out/<channel>/noteon/<note> <velocity>
+	<topic>/out/<channel>/noteoff/<note> <velocity>
+	<topic>/out/<channel>/poly_aftertouch/<note> <pressure>
+	<topic>/out/<channel>/cc/<controller> <value>
 
 
 ### Commands from MQTT to MIDI device (write-only)
@@ -47,10 +48,10 @@ where \<topic\> defaults to 'midi', \<channel\> is the MIDI channel (0-15), \<ty
 of 'noteon', 'noteoff', etc., \<parameter\> depends on type, and \<value\> is the message payload
 which also depends on type.
 
-`<topic>/in/<channel>/noteon/<note> <velocity>`
-`<topic>/in/<channel>/noteoff/<note> <velocity>`
-`<topic>/in/<channel>/poly_aftertouch/<note> <pressure>`
-`<topic>/in/<channel>/cc/<controller> <value>`
+	<topic>/in/<channel>/noteon/<note> <velocity>
+	<topic>/in/<channel>/noteoff/<note> <velocity>
+	<topic>/in/<channel>/poly_aftertouch/<note> <pressure>
+	<topic>/in/<channel>/cc/<controller> <value>
 
 
 ### Special-purpose topics
