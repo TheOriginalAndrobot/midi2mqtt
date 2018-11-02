@@ -37,8 +37,8 @@ mqtt.on('connect', function () {
     mqttConnected = true;
     log.info('mqtt connected ' + config.url);
     mqtt.publish(config.topic + '/connected', '1');
-    log.info('mqtt subscribe', config.topic + '/+/in/+/+');
-    mqtt.subscribe(config.topic + '/+/in/+/+');
+    log.info('mqtt subscribe', config.topic + '/in/+/+/+');
+    mqtt.subscribe(config.topic + '/in/+/+/+');
 
 });
 
@@ -58,7 +58,7 @@ mqtt.on('message', function (topic, payload) {
     log.debug('mqtt <', topic, payload);
 
     var parts = topic.split('/');
-    var channel = parseInt(parts[parts.length-4]);
+    var channel = parseInt(parts[parts.length-3]);
     var type = parts[parts.length-2].toString();
     var param = parseInt(parts[parts.length-1]);
     var value = parseInt(payload);
@@ -107,22 +107,22 @@ var midiOut = new Midi.Output(config.midiPort);
 
 midiIn.on('noteoff', function (msg) {
   log.debug('midi < noteoff', msg.note, msg.velocity, msg.channel);
-  pubMQTT('' + msg.channel + '/out/noteoff/' + msg.note, msg.velocity.toString());
+  pubMQTT('out/' + msg.channel + '/noteoff/' + msg.note, msg.velocity.toString());
 });
 
 midiIn.on('noteon', function (msg) {
   log.debug('midi < noteon', msg.note, msg.velocity, msg.channel);
-  pubMQTT('' + msg.channel + '/out/noteon/' + msg.note, msg.velocity.toString());
+  pubMQTT('out/' + msg.channel + '/noteon/' + msg.note, msg.velocity.toString());
 });
 
 midiIn.on('poly aftertouch', function (msg) {
   log.debug('midi < poly aftertouch', msg.note, msg.pressure, msg.channel);
-  pubMQTT('' + msg.channel + '/out/poly_aftertouch/' + msg.note, msg.pressure.toString());
+  pubMQTT('out/' + msg.channel + '/poly_aftertouch/' + msg.note, msg.pressure.toString());
 });
 
 midiIn.on('cc', function (msg) {
   log.debug('midi < cc', msg.controller, msg.value, msg.channel);
-  pubMQTT('' + msg.channel + '/out/cc/' + msg.controller, msg.value.toString());
+  pubMQTT('out/' + msg.channel + '/cc/' + msg.controller, msg.value.toString());
 });
 
 midiIn.on('program', function (msg) {

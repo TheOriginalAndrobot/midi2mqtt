@@ -14,7 +14,7 @@ This is a simple bridge between a MIDI device and MQTT. Right now it only suppor
 * All pre-requisites from the node-midi package, including the libasound2-dev package if on Linux
 
 ### Install:    
-Run `sudo npm install -g midi2mqtt`. Note that you may need to first run `sudo apt-get install libasound2-dev`
+Run `sudo npm install --unsafe-perm -g midi2mqtt`. Note that you may need to first run `sudo apt-get install libasound2-dev`
 to satisfy dependancies of the Node.js midi library.
 
 
