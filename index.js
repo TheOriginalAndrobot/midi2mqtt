@@ -102,8 +102,8 @@ mqtt.on('message', function (topic, payload) {
 log.info('Available MIDI inputs: ', Midi.getInputs());
 log.info('Available MIDI outputs: ', Midi.getOutputs());
 
-var midiIn = new Midi.Input(config.midiPort);
-var midiOut = new Midi.Output(config.midiPort);
+var midiIn = new Midi.Input(config.inputMidiPort);
+var midiOut = new Midi.Output(config.outputMidiPort);
 
 midiIn.on('noteoff', function (msg) {
   log.debug('midi < noteoff', msg.note, msg.velocity, msg.channel);
