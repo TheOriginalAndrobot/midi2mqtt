@@ -69,8 +69,8 @@ mqtt.on('message', function (topic, payload) {
         case 'noteon':
         case 'noteoff':
             var data = Object();
-            data['note'] = param;
-            data['velocity'] = value;
+            data['note'] = value;
+            data['velocity'] = 100;
             data['channel'] = channel;
             midiOut.send(type, data);
             break;
