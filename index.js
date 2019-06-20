@@ -35,10 +35,18 @@ function pubMQTT(topic, payload){
 
 mqtt.on('connect', function () {
     mqttConnected = true;
+    var sub = '';
+
+    if (config.subscribe == 'midiin') {
+      sub = '/in/+/+/+';
+    } else if (config.subscribe == 'midiout') {
+      sub = '/out/+/+/+';
+    }
+
     log.info('mqtt connected ' + config.url);
     mqtt.publish(config.topic + '/connected', '1');
-    log.info('mqtt subscribe', config.topic + '/in/+/+/+');
-    mqtt.subscribe(config.topic + '/in/+/+/+');
+    log.info('mqtt subscribe', config.topic + sub);
+    mqtt.subscribe(config.topic + sub);
 
 });
 
