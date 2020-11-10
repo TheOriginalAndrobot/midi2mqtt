@@ -35,10 +35,18 @@ function pubMQTT(topic, payload){
 
 mqtt.on('connect', function () {
     mqttConnected = true;
+    var sub = '';
+
+    if (config.subscribe == 'midiin') {
+      sub = '/in/+/+/+';
+    } else if (config.subscribe == 'midiout') {
+      sub = '/out/+/+/+';
+    }
+
     log.info('mqtt connected ' + config.url);
     mqtt.publish(config.topic + '/connected', '1');
-    log.info('mqtt subscribe', config.topic + '/in/+/+/+');
-    mqtt.subscribe(config.topic + '/in/+/+/+');
+    log.info('mqtt subscribe', config.topic + sub);
+    mqtt.subscribe(config.topic + sub);
 
 });
 
@@ -102,8 +110,8 @@ mqtt.on('message', function (topic, payload) {
 log.info('Available MIDI inputs: ', Midi.getInputs());
 log.info('Available MIDI outputs: ', Midi.getOutputs());
 
-var midiIn = new Midi.Input(config.midiPort);
-var midiOut = new Midi.Output(config.midiPort);
+var midiIn = new Midi.Input(config.inputMidiPort);
+var midiOut = new Midi.Output(config.outputMidiPort);
 
 midiIn.on('noteoff', function (msg) {
   log.debug('midi < noteoff', msg.note, msg.velocity, msg.channel);

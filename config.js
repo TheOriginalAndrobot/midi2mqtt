@@ -4,20 +4,26 @@ var config = require('yargs')
     .describe('v', 'possible values: "error", "warn", "info", "debug"')
     .describe('t', 'prefix for connected topic')
     .describe('u', 'mqtt broker url. See https://github.com/mqttjs/MQTT.js#connect-using-a-url')
-    .describe('p', 'Full MIDI port/device name')
+    .describe('i', 'Input MIDI port/device name')
     .describe('h', 'show help')
+    .describe('o', 'Output MIDI port/device name')
+    .describe('s', 'Subscribe midiin or midiout')
     .alias({
         'h': 'help',
         'v': 'verbosity',
         't': 'topic',
         'u': 'url',
-        'p': 'midi-port'
+        'i': 'input-midi-port',
+        'o': 'output-midi-port',
+        's': 'subscribe'
     })
     .default({
         'v': 'info',
         't': 'midi',
         'u': 'mqtt://127.0.0.1',
-        'p': 'Midi Fighter 3D 20:0'
+        'i': 'loopMIDI Port 0',
+        'o': 'loopMIDI Port 1',
+        's': 'midiin'
     })
     .version(pkg.name + ' ' + pkg.version + '\n', 'version')
     .help('help')

@@ -3,12 +3,12 @@
   "description": "Bridge a MIDI device to MQTT",
   "author": "Andy Swing <andy@swings.net> (https://github.com/TheOriginalAndrobot)",
   "license": "MIT",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "preferGlobal": true,
   "bin": "./index.js",
   "dependencies": {
     "easymidi": "^1.0.1",
-    "midi": "^0.9.5",
+    "midi": "^1.0.0",
     "mqtt": "^2.18.8",
     "yalm": "^4.0.2",
     "yargs": "^6.0.3"
