@@ -24,7 +24,12 @@ var mqttConnected;
 //
 
 log.info('mqtt trying to connect to', config.broker);
-var mqtt = Mqtt.connect(config.broker, {will: {topic: config.topic + '/connected', payload: '0'}});
+var mqtt = Mqtt.connect(config.broker, {
+    clientId: 'midi2mqtt',
+    username: String(config.user),
+    password: String(config.password),
+    will: {topic: config.topic + '/connected', payload: '0'}
+  });
 
 // Shotcut for publishing to MQTT and logging it
 function pubMQTT(topic, payload){
@@ -99,6 +104,7 @@ mqtt.on('message', function (topic, payload) {
 //
 // Midi connections
 //
+
 log.info('Available MIDI inputs: ', Midi.getInputs());
 log.info('Available MIDI outputs: ', Midi.getOutputs());
 
