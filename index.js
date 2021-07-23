@@ -23,8 +23,8 @@ var mqttConnected;
 // MQTT
 //
 
-log.info('mqtt trying to connect to', config.url);
-var mqtt = Mqtt.connect(config.url, {will: {topic: config.topic + '/connected', payload: '0'}});
+log.info('mqtt trying to connect to', config.broker);
+var mqtt = Mqtt.connect(config.broker, {will: {topic: config.topic + '/connected', payload: '0'}});
 
 // Shotcut for publishing to MQTT and logging it
 function pubMQTT(topic, payload){
@@ -35,7 +35,7 @@ function pubMQTT(topic, payload){
 
 mqtt.on('connect', function () {
     mqttConnected = true;
-    log.info('mqtt connected ' + config.url);
+    log.info('mqtt connected ' + config.broker);
     mqtt.publish(config.topic + '/connected', '1');
     log.info('mqtt subscribe', config.topic + '/in/+/+/+');
     mqtt.subscribe(config.topic + '/in/+/+/+');
@@ -45,7 +45,7 @@ mqtt.on('connect', function () {
 mqtt.on('close', function () {
     if (mqttConnected) {
         mqttConnected = false;
-        log.info('mqtt closed ' + config.url);
+        log.info('mqtt closed ' + config.broker);
     }
 });
 
@@ -102,8 +102,8 @@ mqtt.on('message', function (topic, payload) {
 log.info('Available MIDI inputs: ', Midi.getInputs());
 log.info('Available MIDI outputs: ', Midi.getOutputs());
 
-var midiIn = new Midi.Input(config.midiPort);
-var midiOut = new Midi.Output(config.midiPort);
+var midiIn = new Midi.Input(config.device);
+var midiOut = new Midi.Output(config.device);
 
 midiIn.on('noteoff', function (msg) {
   log.debug('midi < noteoff', msg.note, msg.velocity, msg.channel);
