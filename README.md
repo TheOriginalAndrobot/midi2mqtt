@@ -20,7 +20,7 @@ to satisfy dependancies of the Node.js midi library.
 
 ### Start:	
 First run `midi2mqtt --help` to see how the program is used.
-* You will likely need to specify the MIDI port (`-p`)
+* You will likely need to specify the MIDI device (`-d`)
 * You can also specify the MQTT topic prefix with `-t`, including slashes (e.g. `-t "home/midi"`).
 
 If you do not know the MIDI port names on your system, you can simply run `midi2mqtt` and look for the
@@ -29,7 +29,7 @@ messages about avaialble MIDI input and output devices.
 Simply press `ctrl-c` to exit the application on the command line.
 
 ### Example command line:  
-`midi2mqtt -t "house/midi" -u "mqtt://mqtt-server" -p "Midi Fighter 3D 20:0"`
+`midi2mqtt -t "house/midi" -b "mqtt://mqtt-server" -u username -p topsecret -d "Midi Fighter 3D 20:0"`
 
 ## Topics and Payloads
 
@@ -82,7 +82,7 @@ First, as root, create `/usr/lib/systemd/system/midi2mqtt.service` with the foll
 	
 	[Service]
 	Type=simple
-	ExecStart=/usr/local/bin/midi2mqtt -t "midi" -u "http://mqtt-server" -p "MIDI Device Name"
+	ExecStart=/usr/local/bin/midi2mqtt -t "midi" -b "http://mqtt-server" -d "MIDI Device Name"
 	Restart=always
 	User=<user>
 	Group=<group>
